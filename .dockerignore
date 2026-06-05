@@ -1,0 +1,11 @@
+node_modules
+.next
+dist
+build
+bin
+*.wasm
+.git
+.pnpm-debug.log
+pnpm-lock.yaml
+.env*
+! .env.example

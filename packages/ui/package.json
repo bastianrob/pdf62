@@ -1,0 +1,77 @@
+{
+  "name": "@pdf62/ui",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "exports": {
+    "./globals.css": "./src/globals.css",
+    "./components/Badge": {
+      "types": "./src/components/Badge.tsx",
+      "default": "./src/components/Badge.tsx"
+    },
+    "./components/Dropzone": {
+      "types": "./src/components/Dropzone.tsx",
+      "default": "./src/components/Dropzone.tsx"
+    },
+    "./components/FileCard": {
+      "types": "./src/components/FileCard.tsx",
+      "default": "./src/components/FileCard.tsx"
+    },
+    "./components/Footer": {
+      "types": "./src/components/Footer.tsx",
+      "default": "./src/components/Footer.tsx"
+    },
+    "./components/Header": {
+      "types": "./src/components/Header.tsx",
+      "default": "./src/components/Header.tsx"
+    },
+    "./components/HeroSection": {
+      "types": "./src/components/HeroSection.tsx",
+      "default": "./src/components/HeroSection.tsx"
+    },
+    "./components/ProGate": {
+      "types": "./src/components/ProGate.tsx",
+      "default": "./src/components/ProGate.tsx"
+    },
+    "./components/ProgressBar": {
+      "types": "./src/components/ProgressBar.tsx",
+      "default": "./src/components/ProgressBar.tsx"
+    },
+    "./components/Sidebar": {
+      "types": "./src/components/Sidebar.tsx",
+      "default": "./src/components/Sidebar.tsx"
+    },
+    "./components/Slider": {
+      "types": "./src/components/Slider.tsx",
+      "default": "./src/components/Slider.tsx"
+    },
+    "./components/ThemeToggle": {
+      "types": "./src/components/ThemeToggle.tsx",
+      "default": "./src/components/ThemeToggle.tsx"
+    },
+    "./components/ToolHeader": {
+      "types": "./src/components/ToolHeader.tsx",
+      "default": "./src/components/ToolHeader.tsx"
+    },
+    "./components/ToolSection": {
+      "types": "./src/components/ToolSection.tsx",
+      "default": "./src/components/ToolSection.tsx"
+    }
+  },
+  "peerDependencies": {
+    "next": "^16",
+    "react": "^19"
+  },
+  "devDependencies": {
+    "@types/react": "^19",
+    "next": "^16",
+    "react": "^19",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@radix-ui/colors": "^3.0.0",
+    "@radix-ui/react-icons": "^1.3.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "tailwindcss": "^4.0.0"
+  }
+}
