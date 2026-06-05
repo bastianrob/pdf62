@@ -1,0 +1,9 @@
+{
+  "name": "@pdf62/engine",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "build": "GOOS=js GOARCH=wasm go build -o dist/processor.wasm main_wasm.go"
+  }
+}
