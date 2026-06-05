@@ -4,6 +4,7 @@ const isDev = process.env.NODE_ENV === 'development'
 const scriptSrc = `'self' 'unsafe-inline' 'wasm-unsafe-eval'${isDev ? " 'unsafe-eval'" : ''}`
 
 const nextConfig = {
+  output: 'standalone',
   // Turbopack (default in Next.js 16) supports WebAssembly natively — no webpack config needed
   async headers() {
     return [
