@@ -42,7 +42,56 @@ Follow these instructions to run the project locally on your machine.
 ---
 
 ## Deployment
-For detailed instructions on deploying the application to staging or production, please refer to the [Deployment Guide](file:///Users/robinbastian/OSS/pdf62.skyhold.id/deployment_guide.md).
+
+PDF62 supports two deployment modes: **Static Export** and **Docker**. Both modes run all PDF processing client-side via WebAssembly — no server-side PDF computation occurs in either mode.
+
+### Static Export (CDN / Static Hosting)
+
+Produces a fully self-contained `out/` directory with HTML, CSS, JS, and the WASM binary. No running server is required.
+
+**Prerequisites:** Node.js ≥ 20, pnpm, Go ≥ 1.26
+
+```bash
+# Build the Go WASM engine
+cd packages/engine && GOOS=js GOARCH=wasm go build -o dist/processor.wasm main_wasm.go && cd ../..
+
+# Copy WASM into public/ and build static export
+pnpm --filter @pdf62/web build:static
+
+# Output is in apps/web/out/
+```
+
+Upload `apps/web/out/` to any static host: **Cloudflare Pages**, **Netlify**, **Vercel**, **GitHub Pages**, **AWS S3 + CloudFront**, **Nginx**, or **Caddy**.
+
+> **Note:** Your hosting provider must serve `.wasm` files with `Content-Type: application/wasm`.
+
+### Docker
+
+```bash
+# Build and run with Docker Compose
+docker compose up --build
+
+# Or build and run directly
+docker build -f apps/web/Dockerfile -t pdf62 .
+docker run -p 3000:3000 pdf62
+```
+
+| Variable | Description | Default |
+|---|---|---|
+| `PORT` | Server listening port | `3000` |
+| `NODE_ENV` | Node.js environment | `production` |
+| `NEXT_PUBLIC_GA_ID` | Google Analytics tracking ID | *(none)* |
+
+### Comparison
+
+| Aspect | Static Export | Docker |
+|---|---|---|
+| Server required | No | Yes (Node.js) |
+| Scaling | Infinite (CDN) | Horizontal (container replicas) |
+| Cost | Near-zero | Server instance cost |
+| Caching | CDN edge caching (optimal) | Requires reverse proxy |
+
+For detailed troubleshooting and hosting provider setup, see `/tmp/DEPLOYMENT.md`.
 
 ## Licensing
 This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.

@@ -8,7 +8,7 @@ self.onmessage = async (e) => {
 
   if (!wasmReady) {
     const go = new Go()
-    const wasmResp = await fetch('/api/wasm?v=2')
+    const wasmResp = await fetch('/processor.wasm')
     const { instance } = await WebAssembly.instantiateStreaming(wasmResp, go.importObject)
     go.run(instance)
     wasmReady = true

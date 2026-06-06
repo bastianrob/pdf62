@@ -32,8 +32,8 @@ COPY apps/web ./apps/web
 COPY packages/ui ./packages/ui
 COPY packages/engine ./packages/engine
 
-# Copy WASM binary from stage 1
-COPY --from=wasm-builder /engine/dist/processor.wasm ./packages/engine/dist/processor.wasm
+# Copy WASM binary from stage 1 into public/ so it's served as a static asset
+COPY --from=wasm-builder /engine/dist/processor.wasm ./apps/web/public/processor.wasm
 
 # Build the project
 RUN npx turbo build --filter=@pdf62/web...
@@ -50,7 +50,6 @@ RUN adduser --system --uid 1001 nextjs
 COPY --from=builder /app/apps/web/.next/standalone ./
 COPY --from=builder /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=builder /app/apps/web/public ./apps/web/public
-COPY --from=builder /app/packages/engine/dist/processor.wasm ./packages/engine/dist/processor.wasm
 
 USER nextjs
 

@@ -6,6 +6,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:static": "pnpm prep:wasm && DEPLOY_MODE=static pnpm build",
+    "prep:wasm": "cp ../../packages/engine/dist/processor.wasm ./public/processor.wasm",
     "start": "next start",
     "lint": "next lint"
   },
