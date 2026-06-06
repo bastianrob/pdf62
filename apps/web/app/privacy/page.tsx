@@ -1,8 +1,15 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | PDF62",
+  title: "Privacy Policy",
   description: "Privacy policy and terms of data processing for PDF62.",
+  alternates: {
+    canonical: "/privacy",
+  },
+  openGraph: {
+    title: "Privacy Policy | PDF62",
+    description: "Privacy policy and terms of data processing for PDF62.",
+  },
 }
 
 export default function PrivacyPage() {

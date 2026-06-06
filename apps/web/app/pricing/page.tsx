@@ -3,8 +3,15 @@ import { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "Pricing | PDF62",
+  title: "Pricing",
   description: "PDF62 is 100% free and ad-supported. Support us by making a donation.",
+  alternates: {
+    canonical: "/pricing",
+  },
+  openGraph: {
+    title: "Pricing | PDF62",
+    description: "PDF62 is 100% free and ad-supported. Support us by making a donation.",
+  },
 }
 
 export default function PricingPage() {

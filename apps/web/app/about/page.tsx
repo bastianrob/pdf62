@@ -1,8 +1,15 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "About Us | PDF62",
-  description: "Learn more about PDF62 and our mission to provide secure, local PDF processing.",
+  title: "About Us",
+  description: "About PDF62 — we build free, privacy-first PDF tools powered by WebAssembly. Learn about our mission and the team behind the tools.",
+  alternates: {
+    canonical: "/about",
+  },
+  openGraph: {
+    title: "About Us | PDF62",
+    description: "About PDF62 — we build free, privacy-first PDF tools powered by WebAssembly. Learn about our mission and the team behind the tools.",
+  },
 }
 
 export default function AboutPage() {

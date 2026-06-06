@@ -14,7 +14,7 @@ const nextConfig = {
         headers: [
           {
             key: "Content-Security-Policy",
-            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' http://localhost:8080 https://oauth.pdf62.id; frame-ancestors 'none'; upgrade-insecure-requests;`,
+            value: `default-src 'self'; script-src ${scriptSrc}; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; connect-src 'self' http://localhost:8080 https://oauth.pdf62.skyhold.id; frame-ancestors 'none'; upgrade-insecure-requests;`,
           },
         ],
       },

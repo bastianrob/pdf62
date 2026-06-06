@@ -1,0 +1,9 @@
+{
+  "name": "PDF62 — Free & Private PDF Tools",
+  "short_name": "PDF62",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#E5322D",
+  "background_color": "#0f0f12",
+  "icons": [{ "src": "/favicon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}

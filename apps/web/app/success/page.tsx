@@ -1,5 +1,12 @@
 import Link from "next/link"
 import { RocketIcon } from "@radix-ui/react-icons"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Subscription Active",
+  description: "Your PDF62 Pro subscription is now active.",
+  robots: { index: false, follow: false },
+}
 
 export default function SuccessPage() {
   return (

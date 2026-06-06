@@ -1,8 +1,15 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | PDF62",
-  description: "Cookie policy and usage information for PDF62.",
+  title: "Cookie Policy",
+  description: "PDF62 cookie policy — learn about essential cookies, analytics, and advertising cookies used on our site.",
+  alternates: {
+    canonical: "/cookies",
+  },
+  openGraph: {
+    title: "Cookie Policy | PDF62",
+    description: "PDF62 cookie policy — learn about essential cookies, analytics, and advertising cookies used on our site.",
+  },
 }
 
 export default function CookiesPage() {

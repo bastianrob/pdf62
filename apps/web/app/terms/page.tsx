@@ -1,8 +1,15 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Terms of Service | PDF62",
+  title: "Terms of Service",
   description: "Terms of service and usage conditions for PDF62.",
+  alternates: {
+    canonical: "/terms",
+  },
+  openGraph: {
+    title: "Terms of Service | PDF62",
+    description: "Terms of service and usage conditions for PDF62.",
+  },
 }
 
 export default function TermsPage() {

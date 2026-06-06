@@ -18,17 +18,44 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params
   const post = await getPostBySlug(slug)
   return {
-    title: `${post.title} | pdf62 Blog`,
+    title: post.title,
     description: post.description,
+    alternates: {
+      canonical: `/blog/${slug}`,
+    },
+    openGraph: {
+      title: `${post.title} | PDF62 Blog`,
+      description: post.description,
+      type: 'article',
+      publishedTime: post.date,
+      url: `https://pdf62.skyhold.id/blog/${slug}`,
+    },
   }
 }
+
+const BASE_URL = 'https://pdf62.skyhold.id'
 
 export default async function PostPage({ params }: Props) {
   const { slug } = await params
   const post = await getPostBySlug(slug)
 
+  const articleJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    author: { '@type': 'Organization', name: 'PDF62' },
+    publisher: { '@type': 'Organization', name: 'PDF62' },
+    url: `${BASE_URL}/blog/${slug}`,
+  }
+
   return (
     <main className="max-w-4xl mx-auto p-8 animate-fade-in-up">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Link
         href="/blog"
         className="inline-flex items-center gap-2 text-sm font-medium text-slate-11 hover:text-slate-12 transition-colors mb-8"

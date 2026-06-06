@@ -2,8 +2,62 @@ import { Metadata } from "next"
 import Link from "next/link"
 
 export const metadata: Metadata = {
-  title: "FAQ | PDF62",
-  description: "Frequently Asked Questions about PDF62.",
+  title: "FAQ",
+  description: "Get answers about PDF62 — how our free, private PDF tools work, supported browsers, file limits, and more.",
+  alternates: {
+    canonical: "/faq",
+  },
+  openGraph: {
+    title: "FAQ | PDF62",
+    description: "Get answers about PDF62 — how our free, private PDF tools work, supported browsers, file limits, and more.",
+  },
+}
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "Is PDF62 really free?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Yes, our core tools are completely free to use. We support the service through advertising.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Are my files uploaded to your servers?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No. Unlike traditional PDF tools, PDF62 processes all your files locally on your own device using WebAssembly technology. Your sensitive documents never leave your browser.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Is there a file size limit?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Because processing happens on your device, there are no artificial file size limits. However, very large files may be constrained by your computer's available memory (RAM).",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "Do I need to create an account?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No account or registration is required to use the free tools.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "What browsers are supported?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "We support all modern web browsers that support WebAssembly, including recent versions of Chrome, Edge, Firefox, and Safari.",
+      },
+    },
+  ],
 }
 
 export default function FAQPage() {
@@ -32,6 +86,10 @@ export default function FAQPage() {
 
   return (
     <div className="p-8 text-slate-11">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <h1 className="text-4xl font-bold text-slate-12 tracking-tight">Frequently Asked Questions</h1>
       <p className="mb-10 text-sm">Have a question? We're here to help.</p>
 

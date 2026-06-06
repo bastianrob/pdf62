@@ -7,10 +7,31 @@ import { GoogleAnalytics } from "@next/third-parties/google"
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" })
 
+const BASE_URL = "https://pdf62.skyhold.id"
+
 export const metadata: Metadata = {
-  title: "PDF62 | Secure & Fast PDF Processing",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "PDF62 | Secure & Fast PDF Processing",
+    template: "%s | PDF62",
+  },
   description: "Cross-platform PDF manipulation suite. Split, merge, and compress securely on your machine.",
   icons: "/favicon.svg",
+  manifest: "/manifest.json",
+  alternates: {
+    languages: {
+      en: "/",
+      "x-default": "/",
+    },
+  },
+  openGraph: {
+    siteName: "PDF62",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 }
 
 export default async function RootLayout({

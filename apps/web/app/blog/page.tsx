@@ -3,8 +3,16 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'News, Tips & Tutorials | PDF62 Blog',
+  title: 'News, Tips & Tutorials',
   description: 'General news, tips, and tutorials for working with PDFs and online privacy.',
+  alternates: {
+    canonical: '/blog',
+  },
+  openGraph: {
+    title: 'News, Tips & Tutorials | PDF62 Blog',
+    description: 'General news, tips, and tutorials for working with PDFs and online privacy.',
+    type: 'website',
+  },
 }
 
 export default function BlogPage() {

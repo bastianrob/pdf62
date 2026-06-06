@@ -1,8 +1,15 @@
 import { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Contact Us | PDF62",
-  description: "Get in touch with the PDF62 team.",
+  title: "Contact Us",
+  description: "Contact the PDF62 team for questions, feedback, bug reports, or partnership inquiries about our private PDF tools.",
+  alternates: {
+    canonical: "/contact",
+  },
+  openGraph: {
+    title: "Contact Us | PDF62",
+    description: "Contact the PDF62 team for questions, feedback, bug reports, or partnership inquiries about our private PDF tools.",
+  },
 }
 
 export default function ContactPage() {
@@ -24,10 +31,10 @@ export default function ContactPage() {
               The best way to reach us is via email. We aim to respond to all inquiries as soon as possible.
             </p>
             <a 
-              href="mailto:contact@pdf62.id" 
+              href="mailto:pdf62@skyhold.id" 
               className="inline-flex items-center justify-center font-bold text-[#E5322D] hover:text-[#C53030] transition-colors"
             >
-              contact@pdf62.id
+              pdf62@skyhold.id
             </a>
           </div>
         </section>
