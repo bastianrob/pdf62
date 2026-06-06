@@ -10,7 +10,7 @@ self.onmessage = async (e) => {
       // The worker authenticates against the same domain, meaning cookies/sessions are passed.
       // This will hit the Wasm Gatekeeper route.
       const go = new (self as any).Go(); // Assumes wasm_exec.js is loaded
-      const result = await WebAssembly.instantiateStreaming(fetch('/api/wasm'), go.importObject);
+      const result = await WebAssembly.instantiateStreaming(fetch('/processor.wasm'), go.importObject);
       go.run(result.instance);
       wasmInstance = true;
       self.postMessage({ status: 'READY' });

@@ -88,6 +88,9 @@ web_modules/
 .next/
 out/
 
+# WASM build artifact (copied here by prep:wasm)
+apps/web/public/processor.wasm
+
 # Nuxt.js build project
 .nuxt
 dist/
