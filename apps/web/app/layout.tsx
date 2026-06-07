@@ -1,9 +1,11 @@
 import { Footer } from "@pdf62/ui/components/Footer"
 import { Header } from "@pdf62/ui/components/Header"
+import { CookieBanner } from "@pdf62/ui/components/CookieBanner"
 import "@pdf62/ui/globals.css"
 import type { Metadata } from "next"
 import { Geist } from "next/font/google"
 import { GoogleAnalytics } from "@next/third-parties/google"
+import Script from "next/script"
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" })
 
@@ -52,7 +54,23 @@ export default async function RootLayout({
           {children}
         </main>
         <Footer />
-        {gaId && <GoogleAnalytics gaId={gaId} />}
+        <CookieBanner />
+        {gaId && (
+          <>
+            <Script id="cookie-consent-default" strategy="beforeInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('consent', 'default', {
+                  'analytics_storage': 'denied',
+                  'ad_storage': 'denied',
+                  'wait_for_update': 500
+                });
+              `}
+            </Script>
+            <GoogleAnalytics gaId={gaId} />
+          </>
+        )}
       </body>
     </html>
   )

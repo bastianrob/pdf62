@@ -9,6 +9,10 @@
       "types": "./src/components/Badge.tsx",
       "default": "./src/components/Badge.tsx"
     },
+    "./components/CookieBanner": {
+      "types": "./src/components/CookieBanner.tsx",
+      "default": "./src/components/CookieBanner.tsx"
+    },
     "./components/Dropzone": {
       "types": "./src/components/Dropzone.tsx",
       "default": "./src/components/Dropzone.tsx"
