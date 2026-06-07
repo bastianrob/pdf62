@@ -1,4 +1,4 @@
-import { getAllPosts, getPostBySlug } from '@/lib/posts'
+import { getAllSlugs, getPostBySlug } from '@/lib/posts'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import type { Metadata } from 'next'
 import Link from 'next/link'
@@ -11,8 +11,8 @@ export const revalidate = 3600
 
 // Pre-generate all post pages at build time
 export async function generateStaticParams() {
-  const posts = await getAllPosts()
-  return posts.map((post) => ({ slug: post.slug }))
+  const slugs = await getAllSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 // Dynamic metadata per post

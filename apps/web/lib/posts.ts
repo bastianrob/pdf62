@@ -26,51 +26,103 @@ const fetchOptions = {
   },
 }
 
-// Get all posts sorted by date (newest first)
-export async function getAllPosts(): Promise<PostMeta[]> {
+interface TreeItem {
+  path: string
+  url: string
+}
+
+async function getBlogTree(): Promise<TreeItem[]> {
   try {
-    const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${POSTS_PATH}`
+    const url = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/git/trees/main?recursive=1`
     const res = await fetch(url, fetchOptions)
-
-    if (!res.ok) {
-      console.error(`Failed to fetch posts list: ${res.status} ${res.statusText}`)
-      return []
-    }
-
-    const files: any[] = await res.json()
-    const mdFiles = files.filter((file) => file.name.endsWith('.md'))
-
-    const postsMeta = await Promise.all(
-      mdFiles.map(async (file) => {
-        const slug = file.name.replace(/\.md$/, '')
-        const rawRes = await fetch(file.download_url, { next: { revalidate: 3600 } })
-        
-        if (!rawRes.ok) return null
-
-        const fileContents = await rawRes.text()
-        const { data } = matter(fileContents)
-
-        return {
-          slug,
-          title: data.title || '',
-          date: data.date || '',
-          description: data.description || '',
-          tags: data.tags ?? [],
-        } as PostMeta
-      })
+    if (!res.ok) return []
+    const data = await res.json()
+    return data.tree.filter(
+      (item: any) =>
+        item.path.startsWith(`${POSTS_PATH}/`) &&
+        item.path.endsWith('.md')
     )
-
-    const validPosts = postsMeta.filter((p): p is PostMeta => p !== null)
-    return validPosts.sort((a, b) => b.date.localeCompare(a.date))
   } catch (error) {
-    console.error('Error fetching posts:', error)
+    console.error('Failed to fetch tree:', error)
     return []
   }
 }
 
-// Get a single post by slug
+// Helper to parse filename: [YYYYMMDD]_slug.md
+function parseFilename(filename: string) {
+  const match = filename.match(/^\[(\d{4})(\d{2})(\d{2})\]_(.+)\.md$/)
+  if (!match) return null
+  const [, year, month, day, slug] = match
+  return { date: `${year}-${month}-${day}`, slug, fullPath: filename }
+}
+
+export async function getPaginatedPosts(page: number = 1, limit: number = 10): Promise<{ posts: PostMeta[], totalPosts: number }> {
+  const tree = await getBlogTree()
+
+  // Extract filenames and sort
+  const allFiles = tree
+    .map(item => item.path.replace(`${POSTS_PATH}/`, ''))
+    .map(parseFilename)
+    .filter(Boolean) as { date: string, slug: string, fullPath: string }[]
+
+  // Sort descending by date
+  allFiles.sort((a, b) => b.date.localeCompare(a.date))
+
+  const totalPosts = allFiles.length
+  const startIndex = (page - 1) * limit
+  const paginatedFiles = allFiles.slice(startIndex, startIndex + limit)
+
+  const postsMeta = await Promise.all(
+    paginatedFiles.map(async (file) => {
+      const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${POSTS_PATH}/${encodeURIComponent(file.fullPath)}`
+      const res = await fetch(url, { next: { revalidate: 3600 } })
+      if (!res.ok) return null
+
+      const fileContents = await res.text()
+      const { data } = matter(fileContents)
+
+      return {
+        slug: file.slug,
+        title: data.title || '',
+        date: data.date || file.date,
+        description: data.description || '',
+        tags: data.tags ?? [],
+      } as PostMeta
+    })
+  )
+
+  const validPosts = postsMeta.filter((p): p is PostMeta => p !== null)
+  return { posts: validPosts, totalPosts }
+}
+
+export async function getAllSlugs(): Promise<string[]> {
+  const tree = await getBlogTree()
+  return tree
+    .map(item => item.path.replace(`${POSTS_PATH}/`, ''))
+    .map(parseFilename)
+    .filter(Boolean)
+    .map(f => f!.slug)
+}
+
+export async function getAllPostSlugsAndDates(): Promise<{ slug: string; date: string }[]> {
+  const tree = await getBlogTree()
+  return tree
+    .map(item => item.path.replace(`${POSTS_PATH}/`, ''))
+    .map(parseFilename)
+    .filter(Boolean) as { slug: string; date: string }[]
+}
+
 export async function getPostBySlug(slug: string): Promise<Post> {
-  const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${POSTS_PATH}/${slug}.md`
+  const tree = await getBlogTree()
+  
+  const fileInfo = tree
+    .map(item => item.path.replace(`${POSTS_PATH}/`, ''))
+    .map(parseFilename)
+    .find(f => f?.slug === slug)
+
+  if (!fileInfo) throw new Error(`Post not found: ${slug}`)
+
+  const url = `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${POSTS_PATH}/${encodeURIComponent(fileInfo.fullPath)}`
   const res = await fetch(url, { next: { revalidate: 3600 } })
 
   if (!res.ok) {
@@ -86,7 +138,7 @@ export async function getPostBySlug(slug: string): Promise<Post> {
   return {
     slug,
     title: data.title || '',
-    date: data.date || '',
+    date: data.date || fileInfo.date,
     description: data.description || '',
     tags: data.tags ?? [],
     contentHtml,

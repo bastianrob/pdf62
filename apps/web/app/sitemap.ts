@@ -1,5 +1,5 @@
 import { MetadataRoute } from 'next'
-import { getAllPosts } from '@/lib/posts'
+import { getAllPostSlugsAndDates } from '@/lib/posts'
 
 const BASE_URL = 'https://pdf62.skyhold.id'
 
@@ -23,7 +23,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${BASE_URL}/donate`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
   ]
 
-  const posts = await getAllPosts()
+  const posts = await getAllPostSlugsAndDates()
   const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
