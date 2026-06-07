@@ -7,9 +7,11 @@ interface Props {
   params: Promise<{ slug: string }>
 }
 
+export const revalidate = 3600
+
 // Pre-generate all post pages at build time
 export async function generateStaticParams() {
-  const posts = getAllPosts()
+  const posts = await getAllPosts()
   return posts.map((post) => ({ slug: post.slug }))
 }
 

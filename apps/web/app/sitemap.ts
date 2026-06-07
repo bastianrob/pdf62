@@ -3,7 +3,7 @@ import { getAllPosts } from '@/lib/posts'
 
 const BASE_URL = 'https://pdf62.skyhold.id'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
 
   const staticPages: MetadataRoute.Sitemap = [
@@ -23,7 +23,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${BASE_URL}/donate`, lastModified: now, changeFrequency: 'monthly', priority: 0.4 },
   ]
 
-  const blogPages: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+  const posts = await getAllPosts()
+  const blogPages: MetadataRoute.Sitemap = posts.map((post) => ({
     url: `${BASE_URL}/blog/${post.slug}`,
     lastModified: new Date(post.date),
     changeFrequency: 'monthly' as const,

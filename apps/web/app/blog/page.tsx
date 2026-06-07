@@ -15,8 +15,10 @@ export const metadata: Metadata = {
   },
 }
 
-export default function BlogPage() {
-  const posts = getAllPosts()
+export const revalidate = 3600
+
+export default async function BlogPage() {
+  const posts = await getAllPosts()
 
   return (
     <main className="max-w-4xl mx-auto p-8 animate-fade-in-up">
