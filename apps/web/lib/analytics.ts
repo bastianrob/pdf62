@@ -20,7 +20,8 @@ export function trackToolExecution(
     else sizeBucket = '>10MB'
   }
 
-  if (!process.env.NEXT_PUBLIC_GA_ID) return
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-RL55HZBSVC"
+  if (!gaId) return
 
   sendGAEvent({
     event: 'tool_execution',

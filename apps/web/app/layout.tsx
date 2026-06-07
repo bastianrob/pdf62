@@ -42,7 +42,7 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const gaId = process.env.NEXT_PUBLIC_GA_ID
+  const gaId = process.env.NEXT_PUBLIC_GA_ID || "G-RL55HZBSVC"
 
   return (
     <html lang="en" className={geist.variable}>
