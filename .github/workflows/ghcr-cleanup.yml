@@ -16,7 +16,8 @@ jobs:
       - name: Keep last 3 images
         uses: snok/container-retention-policy@v3.1.0
         with:
-          account-type: personal
+          account: user
           image-names: pdf62
-          keep-at-least: 3
+          cut-off: 1w
+          keep-n-most-recent: 3
           token: ${{ secrets.GITHUB_TOKEN }}
