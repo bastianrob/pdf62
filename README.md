@@ -1,24 +1,43 @@
-# PDF62 Processor Suite
+# PDF62 - Free Local PDF Processing Suite
 
-PDF62 is a high-performance, secure, and privacy-first PDF manipulation suite. It supports splitting, merging, extracting, and compressing PDFs with 100% local processing powered by WebAssembly (Wasm). No files are ever uploaded to a server, ensuring absolute privacy for your documents.
+PDF62 is a high-performance, secure, and privacy-first PDF manipulation suite. Designed to be the ultimate **free PDF compress** and editing tool, it supports splitting, merging, extracting, and compressing PDFs with 100% **local** processing powered by WebAssembly (Wasm).
 
-## Architecture
-This project is built as a **Polyglot Monorepo** using **Turborepo**:
+Because all operations happen directly in your browser, no files are ever uploaded to a server. This guarantees absolute privacy and security for your sensitive documents.
+
+## 🚀 Live Tools
+
+Try our free tools directly in your browser. No installation, no registration, and no server uploads required:
+
+- **[Free PDF Compress](https://pdf62.skyhold.id/compress)**: Reduce PDF file size significantly without losing quality. 100% local and secure.
+- **[Split PDF](https://pdf62.skyhold.id/split)**: Easily separate one PDF into multiple files or extract specific pages.
+- **[Merge PDF](https://pdf62.skyhold.id/merge)**: Combine multiple PDFs into a single document instantly.
+- **[Extract PDF Pages](https://pdf62.skyhold.id/extract)**: Pull out only the pages you need from a larger PDF file.
+
+## ✨ Key Features
+
+- **100% Local Processing:** Powered by WebAssembly, all file manipulation is done locally on your device.
+- **Absolute Privacy & Security:** Your files never leave your computer. We do not upload, store, or process your PDFs on our servers.
+- **Free & Unlimited:** No hidden fees, no paywalls, and no arbitrary file size limits. Enjoy unlimited free PDF compress and editing capabilities.
+- **Fast Performance:** Leveraging the speed of Go and WebAssembly, PDF62 processes even large documents rapidly.
+
+---
+
+## 🛠️ Developer Guide
+
+This project is built as a **Polyglot Monorepo** using **Turborepo**. If you are looking to contribute, fork, or run PDF62 locally, follow the instructions below.
+
+### Architecture
 - **`apps/web`**: Next.js frontend processing PDFs locally in the browser via Wasm.
 - **`packages/engine`**: Go core wrapping `pdfcpu` and compiled to WebAssembly (`dist/processor.wasm`).
 - **`packages/ui`**: Shared Radix UI Primitives and Tailwind v4 design system.
 
----
+### Getting Started
 
-## Getting Started
-
-Follow these instructions to run the project locally on your machine.
-
-### Prerequisites
+#### Prerequisites
 - [pnpm](https://pnpm.io/installation) (Node Package Manager)
 - [Go 1.26+](https://go.dev/doc/install) (Only required if you want to rebuild the WebAssembly core engine)
 
-### Local Development
+#### Local Development
 
 1. **Install Dependencies**
    Run the following from the repository root:
@@ -39,13 +58,11 @@ Follow these instructions to run the project locally on your machine.
    pnpm run build
    ```
 
----
-
-## Deployment
+### Deployment
 
 PDF62 supports two deployment modes: **Static Export** and **Docker**. Both modes run all PDF processing client-side via WebAssembly — no server-side PDF computation occurs in either mode.
 
-### Static Export (CDN / Static Hosting)
+#### Static Export (CDN / Static Hosting)
 
 Produces a fully self-contained `out/` directory with HTML, CSS, JS, and the WASM binary. No running server is required.
 
@@ -65,7 +82,7 @@ Upload `apps/web/out/` to any static host: **Cloudflare Pages**, **Netlify**, **
 
 > **Note:** Your hosting provider must serve `.wasm` files with `Content-Type: application/wasm`.
 
-### Docker
+#### Docker
 
 ```bash
 # Build and run with Docker Compose
@@ -82,7 +99,7 @@ docker run -p 3000:3000 pdf62
 | `NODE_ENV` | Node.js environment | `production` |
 | `NEXT_PUBLIC_GA_ID` | Google Analytics tracking ID | *(none)* |
 
-### Comparison
+#### Comparison
 
 | Aspect | Static Export | Docker |
 |---|---|---|
