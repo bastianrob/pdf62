@@ -1,4 +1,5 @@
 import {
+  ImageIcon,
   LayersIcon,
   ReaderIcon,
   ScissorsIcon,
@@ -35,12 +36,19 @@ const features = [
     description: "Extract specific pages from your PDF file into a new document.",
     color: "red",
   },
+  {
+    href: "/convert",
+    icon: ImageIcon,
+    title: "PDF to Image",
+    description: "Convert each PDF page into a high-quality PNG or JPEG image.",
+    color: "red",
+  },
 ]
 
 export function ToolSection() {
   return (
     <section className="mx-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8">
         {features.map((feature, i) => {
           const Icon = feature.icon
           return (

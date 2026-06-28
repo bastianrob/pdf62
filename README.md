@@ -1,6 +1,6 @@
 # PDF62 - Free Local PDF Processing Suite
 
-PDF62 is a high-performance, secure, and privacy-first PDF manipulation suite. Designed to be the ultimate **free PDF compress** and editing tool, it supports splitting, merging, extracting, and compressing PDFs with 100% **local** processing powered by WebAssembly (Wasm).
+PDF62 is a high-performance, secure, and privacy-first PDF manipulation suite. Designed to be the ultimate **free PDF compress** and editing tool, it supports splitting, merging, extracting, compressing, and converting PDFs to images with 100% **local** processing powered by WebAssembly (Wasm).
 
 Because all operations happen directly in your browser, no files are ever uploaded to a server. This guarantees absolute privacy and security for your sensitive documents.
 
@@ -12,6 +12,7 @@ Try our free tools directly in your browser. No installation, no registration, a
 - **[Split PDF](https://pdf62.skyhold.id/split)**: Easily separate one PDF into multiple files or extract specific pages.
 - **[Merge PDF](https://pdf62.skyhold.id/merge)**: Combine multiple PDFs into a single document instantly.
 - **[Extract PDF Pages](https://pdf62.skyhold.id/extract)**: Pull out only the pages you need from a larger PDF file.
+- **[PDF to Image](https://pdf62.skyhold.id/convert)**: Convert PDF pages to high-quality PNG or JPEG images, entirely in your browser.
 
 ## ✨ Key Features
 
@@ -27,8 +28,8 @@ Try our free tools directly in your browser. No installation, no registration, a
 This project is built as a **Polyglot Monorepo** using **Turborepo**. If you are looking to contribute, fork, or run PDF62 locally, follow the instructions below.
 
 ### Architecture
-- **`apps/web`**: Next.js frontend processing PDFs locally in the browser via Wasm.
-- **`packages/engine`**: Go core wrapping `pdfcpu` and compiled to WebAssembly (`dist/processor.wasm`).
+- **`apps/web`**: Next.js frontend processing PDFs locally in the browser via Wasm. PDF-to-image conversion is rendered client-side by a self-hosted [pdf.js](https://mozilla.github.io/pdf.js/) engine (copied into `public/` at build time by the `prep:pdfjs` script).
+- **`packages/engine`**: Go core wrapping `pdfcpu` and compiled to WebAssembly (`dist/processor.wasm`) — powers split, merge, extract, and compress.
 - **`packages/ui`**: Shared Radix UI Primitives and Tailwind v4 design system.
 
 ### Getting Started

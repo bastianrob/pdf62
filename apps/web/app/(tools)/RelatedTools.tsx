@@ -1,11 +1,12 @@
 import Link from 'next/link'
-import { LayersIcon, ScissorsIcon, ValueNoneIcon, ReaderIcon } from '@radix-ui/react-icons'
+import { LayersIcon, ScissorsIcon, ValueNoneIcon, ReaderIcon, ImageIcon } from '@radix-ui/react-icons'
 
 const tools = [
   { name: 'Compress PDF', path: '/compress', description: 'Reduce file size', icon: ValueNoneIcon },
   { name: 'Merge PDFs', path: '/merge', description: 'Combine files', icon: LayersIcon },
   { name: 'Split PDF', path: '/split', description: 'Divide by pages', icon: ScissorsIcon },
   { name: 'Extract Pages', path: '/extract', description: 'Pull page ranges', icon: ReaderIcon },
+  { name: 'PDF to Image', path: '/convert', description: 'Pages to PNG/JPEG', icon: ImageIcon },
 ]
 
 interface RelatedToolsProps {
