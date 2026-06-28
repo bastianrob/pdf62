@@ -112,4 +112,4 @@ docker run -p 3000:3000 pdf62
 For detailed troubleshooting and hosting provider setup, see `/tmp/DEPLOYMENT.md`.
 
 ## Licensing
-This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+This project is licensed under the **MIT License** — see [LICENSE](LICENSE) for details.
