@@ -1,7 +1,7 @@
 import { sendGAEvent } from '@next/third-parties/google'
 
 export function trackToolExecution(
-  action: 'split' | 'merge' | 'compress' | 'extract',
+  action: 'split' | 'merge' | 'compress' | 'extract' | 'convert',
   metadata: {
     fileSizeBytes?: number
     pageCount?: number

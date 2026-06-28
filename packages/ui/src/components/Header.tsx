@@ -17,6 +17,7 @@ export function Header() {
     { name: "Split PDF", path: "/split", title: "Split a PDF file into separate page ranges" },
     { name: "Compress PDF", path: "/compress", title: "Reduce the file size of a PDF" },
     { name: "Extract PDF", path: "/extract", title: "Extract specific pages from a PDF document" },
+    { name: "PDF to Image", path: "/convert", title: "Convert PDF pages to PNG or JPEG images" },
     { name: "Blog", path: "/blog", title: "Tips, tutorials, and PDF privacy guides" },
   ]
 

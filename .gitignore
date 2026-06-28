@@ -91,6 +91,10 @@ out/
 # WASM build artifact (copied here by prep:wasm)
 apps/web/public/processor.wasm
 
+# pdf.js render worker + support assets (copied here by prep:pdfjs)
+apps/web/public/pdfjs.worker.min.mjs
+apps/web/public/pdfjs/
+
 # Nuxt.js build project
 .nuxt
 dist/

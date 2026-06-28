@@ -1,4 +1,5 @@
 import {
+  ImageIcon,
   LayersIcon,
   ReaderIcon,
   ScissorsIcon,
@@ -33,6 +34,13 @@ const features = [
     icon: ReaderIcon,
     title: "Extract Pages",
     description: "Extract specific pages from your PDF file into a new document.",
+    color: "red",
+  },
+  {
+    href: "/convert",
+    icon: ImageIcon,
+    title: "PDF to Image",
+    description: "Convert each PDF page into a high-quality PNG or JPEG image.",
     color: "red",
   },
 ]
