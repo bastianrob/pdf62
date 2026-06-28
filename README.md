@@ -1,11 +1,11 @@
 # PDF62 Processor Suite
 
-PDF62 is a high-performance, secure, and privacy-first PDF manipulation suite. It supports splitting, merging, extracting, and compressing PDFs with 100% local processing powered by WebAssembly (Wasm). No files are ever uploaded to a server, ensuring absolute privacy for your documents.
+PDF62 is a high-performance, secure, and privacy-first PDF manipulation suite. It supports splitting, merging, extracting, and compressing PDFs, plus converting PDF pages to PNG/JPEG images, with 100% local processing powered by WebAssembly (Wasm). No files are ever uploaded to a server, ensuring absolute privacy for your documents.
 
 ## Architecture
 This project is built as a **Polyglot Monorepo** using **Turborepo**:
-- **`apps/web`**: Next.js frontend processing PDFs locally in the browser via Wasm.
-- **`packages/engine`**: Go core wrapping `pdfcpu` and compiled to WebAssembly (`dist/processor.wasm`).
+- **`apps/web`**: Next.js frontend processing PDFs locally in the browser via Wasm. PDF-to-image conversion is rendered client-side by a self-hosted [pdf.js](https://mozilla.github.io/pdf.js/) engine (copied into `public/` at build time by the `prep:pdfjs` script).
+- **`packages/engine`**: Go core wrapping `pdfcpu` and compiled to WebAssembly (`dist/processor.wasm`) — powers split, merge, extract, and compress.
 - **`packages/ui`**: Shared Radix UI Primitives and Tailwind v4 design system.
 
 ---
