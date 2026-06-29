@@ -60,6 +60,10 @@
     "./components/ToolSection": {
       "types": "./src/components/ToolSection.tsx",
       "default": "./src/components/ToolSection.tsx"
+    },
+    "./components/ToolSeoContent": {
+      "types": "./src/components/ToolSeoContent.tsx",
+      "default": "./src/components/ToolSeoContent.tsx"
     }
   },
   "peerDependencies": {
